@@ -18,7 +18,7 @@ def get_notebooks_infos(note_links):
 
             description = page.locator("div.caption .description").inner_text()
 
-            imgSrc = page.locator(
+            img_src = page.locator(
                 "xpath=/html/body/div[1]/div[3]/div/div[2]/div/div/div[1]/img"
             ).get_attribute("src")
 
@@ -38,19 +38,19 @@ def get_notebooks_infos(note_links):
 
             qty_reviews = rating.locator("p").inner_text()
 
-            qty_starts = rating.locator("span.glyphicon-star").evaluate_all(
+            qty_stars = rating.locator("span.glyphicon-star").evaluate_all(
                 "(stars) => stars.length"
             )
 
             note_info = {
                 "title": title,
                 "description": description,
-                "imgSrc": PAGE_URI + imgSrc,
+                "img_src": PAGE_URI + img_src,
                 "price": float(price.replace("$", "")),
                 "hdd": hdd,
                 "rating": {
                     "qty_reviews": int(qty_reviews.strip(" reviews")),
-                    "qty_starts": int(qty_starts),
+                    "qty_stars": int(qty_stars),
                 },
             }
 
