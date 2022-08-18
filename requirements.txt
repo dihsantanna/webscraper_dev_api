@@ -1,3 +1,4 @@
+altgraph==0.17.2
 aniso8601==9.0.1
 astroid==2.11.7
 atomicwrites==1.4.1
@@ -13,6 +14,7 @@ Flake8-pyproject==1.1.0.post0
 Flask==2.2.2
 Flask-Cors==3.0.10
 Flask-RESTful==0.3.9
+future==0.18.2
 greenlet==1.1.2
 idna==3.3
 iniconfig==1.1.1
@@ -25,6 +27,7 @@ mccabe==0.7.0
 mypy-extensions==0.4.3
 packaging==21.3
 pathspec==0.9.0
+pefile==2022.5.30
 platformdirs==2.5.2
 playwright==1.25.1
 pluggy==1.0.0
@@ -32,12 +35,14 @@ py==1.11.0
 pycodestyle==2.9.1
 pyee==8.1.0
 pyflakes==2.5.0
+pyinstaller-hooks-contrib==2022.8
 pyparsing==3.0.9
 pytest==7.1.2
 pytest-base-url==2.0.0
 pytest-playwright==0.3.0
 python-slugify==6.1.2
 pytz==2022.2.1
+pywin32-ctypes==0.2.0
 requests==2.28.1
 six==1.16.0
 text-unidecode==1.3
