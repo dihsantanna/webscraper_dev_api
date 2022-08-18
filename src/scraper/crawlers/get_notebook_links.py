@@ -25,9 +25,7 @@ def get_notebook_links():
 
             notebooks = page.locator('h4 a:has-text("Lenovo")')
 
-            notebooks_hrefs.extend(
-                notebooks.evaluate_all("(els) => els.map((el) => el.href)")
-            )
+            notebooks_hrefs.extend(notebooks.evaluate_all("(els) => els.map((el) => el.href)"))
 
             browser.close()
 

@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+
 from ..helpers.print_color import print_color
 
 PAGE_URI = "https://webscraper.io"
@@ -34,7 +35,9 @@ def get_notebooks_infos(note_links):
                 )
 
                 hdd = hdd_content.locator("role=button[disabled=false]").evaluate_all(
-                    "(els) => els.filter(el => !el.className.includes('disabled')).map(el => el.innerText)"
+                    """(els) => els
+                        .filter(el => !el.className.includes('disabled'))
+                        .map(el => el.innerText)"""
                 )
 
                 rating = page.locator(
@@ -62,12 +65,14 @@ def get_notebooks_infos(note_links):
                 note_infos.append(note_info)
 
                 print_color(
-                    f"Notebook {i + 1} of {qty_notebooks} scraped.", color="YELLOW"
+                    f"Notebook {i + 1} of {qty_notebooks} scraped.",
+                    color="YELLOW",
                 )
 
             browser.close()
 
-        print_color(f"Scraping completed!", color="GREEN")
+        print_color("Scraping completed!", color="GREEN")
+
         return note_infos
     except Exception as e:
         print_color(e, color="RED")
