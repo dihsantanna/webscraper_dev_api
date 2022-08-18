@@ -1,15 +1,18 @@
 from bson import json_util
+from dotenv import load_dotenv
 from flask import Flask, Response
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_restful import Api, Resource
 
-MONGO_URI = "mongodb://localhost:27017/webscraper"
+load_dotenv()
+
+from os import environ
 
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
-app.config["MONGO_URI"] = MONGO_URI
+app.config["MONGO_URI"] = environ["MONGODB_URI"]
 mongo = PyMongo(app)
 
 

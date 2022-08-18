@@ -1,4 +1,5 @@
-version: '3.9'
+version: "3.9"
+name: webscraper_api
 services:
   api:
     build: .
@@ -8,6 +9,9 @@ services:
       - "5000:5000"
     volumes:
       - .:/app
+    environment:
+      - FLASK_APP=./src/index.py
+      - MONGODB_URI=mongodb://mongodb:27017/webscraper
     networks:
       - webscraper
     depends_on:
@@ -15,7 +19,7 @@ services:
     restart: always
   db:
     image: mongo
-    container_name: db
+    container_name: mongodb
     ports:
       - "27017:27017"
     networks:
