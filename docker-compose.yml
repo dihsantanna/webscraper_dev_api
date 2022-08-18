@@ -2,9 +2,25 @@ version: '3.9'
 services:
   api:
     build: .
-    container_name: webscraper_api
+    image: webscraper
+    container_name: api
     ports:
       - "5000:5000"
     volumes:
       - .:/app
+    networks:
+      - webscraper
+    depends_on:
+      - db
     restart: always
+  db:
+    image: mongo
+    container_name: db
+    ports:
+      - "27017:27017"
+    networks:
+      - webscraper
+    restart: always
+networks:
+  webscraper:
+    name: webscraper
