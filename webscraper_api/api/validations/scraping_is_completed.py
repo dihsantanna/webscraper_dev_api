@@ -4,7 +4,7 @@ from http import HTTPStatus as status
 from flask import Response
 
 
-def scraping_completed(data):
+def scraping_is_completed(data):
     if not data:
         return Response(
             response=json.dumps({"message": "Scraping order does not exist"}),

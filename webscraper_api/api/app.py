@@ -1,51 +1,22 @@
-from bson import ObjectId, json_util
 from dotenv import load_dotenv
-from flask import Flask, Response, request
+from flask import Flask
 from flask_cors import CORS
-from flask_pymongo import PyMongo
-from flask_restful import Api, Resource
-from webscraper_api.api.validations.scraping_completed import scraping_completed
-from webscraper_api.scraper.scraper import Scraper
+from flask_restful import Api
+from webscraper_api.api.controllers.notebooks import Notebooks
+from webscraper_api.api.controllers.scrape import Scrape
+from webscraper_api.api.model.db import mongo
 
 load_dotenv()
 
 from os import environ
 
-app = Flask(__name__)
-api = Api(app)
-CORS(app)
-app.config["MONGO_URI"] = environ["MONGODB_URI"]
-mongo = PyMongo(app)
 
-
-class Notebooks(Resource):
-    def get(self):
-        data = mongo.db.notebook_lenovo.find()
-        return Response(json_util.dumps(data))
-
-
-class Scrape(Resource):
-    def get(self):
-        order_id = request.args.get("orderId", type=str)
-        if order_id is None:
-            return Response(
-                response=json_util.dumps({"message": "Query orderId is required"}),
-                status=400,
-            )
-        data = mongo.db.scrape_order.find_one({"_id": ObjectId(order_id)})
-        return scraping_completed(data)
-
-    def post(self):
-        scraper = Scraper()
-        order_id = scraper.scrape_order()
-        return Response(
-            response=json_util.dumps(
-                {"message": "Scrape order created!", "order_id": str(order_id)}
-            ),
-            mimetype="application/json",
-            status=201,
-        )
-
-
-api.add_resource(Notebooks, "/notebooks")
-api.add_resource(Scrape, "/scrape")
+def create_app(db_uri=environ.get("MONGODB_URI")):
+    app = Flask(__name__)
+    api = Api(app)
+    CORS(app)
+    app.config["MONGO_URI"] = db_uri
+    mongo.init_app(app)
+    api.add_resource(Notebooks, "/notebooks")
+    api.add_resource(Scrape, "/scrape")
+    return app
