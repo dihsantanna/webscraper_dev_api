@@ -14,4 +14,4 @@ api-run:
 	python -m flask run --host=0.0.0.0
 
 scraper-run:
-	python ./src/scrape.py
+	python scrape_init.py

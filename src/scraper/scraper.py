@@ -24,7 +24,7 @@ class Scraper:
 
     def scrape_order(self):
         order_id = self.__save_order()
-        
+
         def handler_scrape_order():
             self.__get_notebooks()
             self.__update_order(order_id)

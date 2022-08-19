@@ -1,5 +1,3 @@
-import _thread
-
 from bson import ObjectId, json_util
 from dotenv import load_dotenv
 from flask import Flask, Response, request
