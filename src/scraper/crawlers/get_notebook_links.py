@@ -1,5 +1,5 @@
 from playwright.sync_api import sync_playwright
-from scraper.helpers.print_color import print_color
+from src.scraper.helpers.print_color import print_color
 
 PAGE_URL = "https://webscraper.io/test-sites/e-commerce/allinone"
 
