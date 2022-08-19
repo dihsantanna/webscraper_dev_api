@@ -1,9 +1,9 @@
 import _thread
 from operator import itemgetter
 
-from src.scraper.crawlers.get_notebook_links import get_notebook_links
-from src.scraper.crawlers.get_notebooks_infos import get_notebooks_infos
-from src.scraper.model_mongo import save_order, save_scraped_data, update_order
+from webscraper_api.scraper.crawlers.get_notebook_links import get_notebook_links
+from webscraper_api.scraper.crawlers.get_notebooks_infos import get_notebooks_infos
+from webscraper_api.scraper.model_mongo import save_order, save_scraped_data, update_order
 
 
 class Scraper:

@@ -4,8 +4,8 @@ from flask import Flask, Response, request
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_restful import Api, Resource
-from src.api.validations.scraping_completed import scraping_completed
-from src.scraper.scraper import Scraper
+from webscraper_api.api.validations.scraping_completed import scraping_completed
+from webscraper_api.scraper.scraper import Scraper
 
 load_dotenv()
 
