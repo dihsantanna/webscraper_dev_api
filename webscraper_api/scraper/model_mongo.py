@@ -5,7 +5,7 @@ from pymongo import MongoClient
 
 load_dotenv()
 
-from os import environ
+from os import environ  # noqa: E402
 
 
 def save_scraped_data(data):

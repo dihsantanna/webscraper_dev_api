@@ -8,7 +8,7 @@ from webscraper_api.api.model.db import mongo
 
 load_dotenv()
 
-from os import environ
+from os import environ  # noqa: E402
 
 
 def create_app(db_uri=environ.get("MONGODB_URI")):
