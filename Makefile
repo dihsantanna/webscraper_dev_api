@@ -1,5 +1,8 @@
-app_install:
-	pip install -e .["dev"]
+freeze:
+	pip freeze > requirements.txt
+
+lint:
+	flake8 ./webscraper_api/
 
 install:requirements.txt
 	pip install -r requirements.txt
@@ -10,7 +13,10 @@ compose-up:
 compose-down:
 	docker-compose down --remove-orphans
 
-api-run:
+dev:
+	python ./webscraper_api/server.py
+
+start:
 	python -m flask run --host=0.0.0.0
 
 scraper-run:
