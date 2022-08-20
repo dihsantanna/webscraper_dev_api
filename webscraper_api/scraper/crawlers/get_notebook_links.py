@@ -31,6 +31,6 @@ def get_notebook_links():
 
             return notebooks_hrefs
     except Exception as e:
-        print_color(e, color="RED")
+        print_color(str(e), color="RED")
     finally:
         print_color(f"Found {len(notebooks_hrefs)} notebooks.", color="YELLOW")

@@ -75,4 +75,4 @@ def get_notebooks_infos(note_links):
 
         return note_infos
     except Exception as e:
-        print_color(e, color="RED")
+        print_color(str(e), color="RED")

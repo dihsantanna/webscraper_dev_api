@@ -1,4 +1,5 @@
 from flask.testing import FlaskClient
+from pymongo import MongoClient
 from pytest import fixture
 from webscraper_api.api.app import create_app
 
