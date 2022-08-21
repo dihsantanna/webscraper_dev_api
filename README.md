@@ -60,6 +60,15 @@ docker container exec -it webscraper_api bash -c "python scrape_init.py"
 ```
 
 *Esse comando serve para iniciar a raspagem de dados inicial, aguarde até o término dela.
+
+## Parando a aplicação
+
+Após utilizar a aplicação caso queira parar a execução da aplicação basta inserir o seguinte comando no terminal:
+
+```bash
+docker-compose down --remove-orphans
+```
+
 ## Usando a API
 
 Abra o seu cliente de API. ([Insominia](https://insomnia.rest/) ou [Postman](https://www.postman.com/))
