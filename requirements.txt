@@ -12,4 +12,5 @@ pytest==7.1.2
 pytest-base-url==2.0.0
 pytest-flask==1.2.0
 pytest-playwright==0.3.0
+pytest-cov==3.0.0
 python-dotenv==0.20.0

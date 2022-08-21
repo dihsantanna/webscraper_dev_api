@@ -1,0 +1,2 @@
+[run]
+omit = webscraper_api/server.py

@@ -4,6 +4,12 @@ freeze:
 lint:
 	flake8 ./webscraper_api/
 
+test:
+	pytest ./tests --verbose
+
+cov:
+	pytest --cov=webscraper_api tests/
+
 install:requirements.txt
 	pip install -r requirements.txt
 
@@ -21,3 +27,6 @@ start:
 
 scraper-run:
 	python scrape_init.py
+
+docker-scraper-run:
+	docker container exec -it webscraper_api bash -c "python scrape_init.py"
