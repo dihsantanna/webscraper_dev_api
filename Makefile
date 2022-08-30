@@ -20,7 +20,7 @@ compose-down:
 	docker-compose down --remove-orphans
 
 dev:
-	python ./webscraper_api/server.py
+	python server_init_dev.py
 
 start:
 	python -m flask run --host=0.0.0.0

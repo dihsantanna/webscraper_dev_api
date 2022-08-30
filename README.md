@@ -32,10 +32,18 @@ O crawler está configurado para obter os dados de notebooks da marca lenovo e o
 
 * [Git](https://git-scm.com/)
 * [Docker](https://www.docker.com/) com o plug-in do [Docker Compose](https://docs.docker.com/compose/install/) instalado. Caso tenha alguma dificuldade sugiro procurar as respectivas documentações clicando nos links. :wink:
+* [MongoDB](https://www.mongodb.com/) * caso queira utilizar sem docker.
 * Um cliente de API como [Insomnia](https://insomnia.rest/) ou [Postman](https://www.postman.com/).
 
-*ATENÇÃO: todos os métodos de intalação e start da aplicação serão explicados utilizando o docker, por isso enfatizo a instalação dele.
 
+## Variáveis de Ambiente
+
+Caso opte por rodar o projeto `sem o docker` é necessário configurar as `variáveis de ambiente`;
+
+```env
+MONGODB_URI=MONGODB_URI=mongodb://<user>:<password>@localhost:27017/webscraper **Caso não possua autenticação basta remover o "<user>:<password>@"
+FLASK_APP=webscraper_api/server.py ***Não mudar
+```
 
 ## Instalação
 
@@ -45,30 +53,72 @@ Primeiramente baixe a aplicação. Em seu terminal insira o seguinte comando:
 git clone git@github.com:dihsantanna/webscraper_dev_api.git && cd webscraper_dev_api
 ```
 
-Com o docker devidamente instalado e habilitado, digite no seu terminal:
+<hr>
 
-```bash
-docker-compose up -d --build
-```
+### `Com docker`
 
-*Este processo pode demorar alguns minutos dependendo de sua velocidade de internet.
+  Com o docker devidamente instalado e habilitado, digite no seu terminal:
 
-Pronto! Sua aplicação já pode ser utilizada e a API estará rodando no http://127.0.0.1:5000/, mas o banco de dados ainda não foi populado e para fazer isso insira o comando:
+  ```bash
+  docker-compose up -d --build
+  ```
 
-```bash
-docker container exec -it webscraper_api bash -c "python scrape_init.py"
-```
+  *Este processo pode demorar alguns minutos dependendo de sua velocidade de internet.
 
-*Esse comando serve para iniciar a raspagem de dados inicial, aguarde até o término dela.
+  Pronto! Sua aplicação já pode ser utilizada e a API estará rodando no http://127.0.0.1:5000/, mas o banco de dados ainda não foi populado e para fazer isso insira o comando:
+
+  ```bash
+  docker container exec -it webscraper_api bash -c "python scrape_init.py"
+  ```
+
+  *Esse comando serve para iniciar a raspagem de dados inicial, aguarde até o término dela.
+
+<hr>
+
+### `Sem docker`
+
+  É aconselhável criar em aplicações python criar um ambiente virtual para isso basta usar o comando abaixo:
+
+  Windows
+  ```bash
+  python -m venv .venv && . .\.venv\Scripts\activate
+  ```
+
+  Linux e MacOs
+  ```bash
+  python -m venv .venv && source .venv/bin/activate
+  ```
+
+  Agora remova o sufixo `.example` do arquivo `.env.example` e configure as variáveis de ambiente. Com as variáveis de ambiente configuradas execute o comando abaixo para instalar dependencias:
+
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+  Agora temos que popular o banco de dados para isso use o comando:
+
+  ```bash
+  python scrape_init.py
+  ```
+
+  *Esse comando serve para iniciar a raspagem de dados inicial, aguarde até o término dela.
+
+  Agora é hora de iniciarmos a API, para isso use o comando:
+
+  ```bash
+  python -m flask run --host=0.0.0.0
+  ```
+
 
 ## Parando a aplicação
 
 Após utilizar a aplicação caso queira parar a execução da aplicação basta inserir o seguinte comando no terminal:
 
+com docker:
 ```bash
 docker-compose down --remove-orphans
 ```
-
+sem docker: `"Basta dar um CTR+C no terminal"` :smile:
 ## Usando a API
 
 Abra o seu cliente de API. ([Insominia](https://insomnia.rest/) ou [Postman](https://www.postman.com/))
@@ -85,96 +135,75 @@ O resultado é parecido com os dados abaixo:
 `STATUS CODE 200`
 ```json
 [
-  {
-    "_id": {
-      "$oid": "63010b3c0de1e8fdcf96bc23"
-    },
-    "title": "Lenovo V110-15IAP",
-    "description": "Lenovo V110-15IAP, 15.6\" HD, Celeron N3350 1.1GHz, 4GB, 128GB SSD, Windows 10 Home",
-    "img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
-    "price": 321.94,
-    "hdd": [
-      "128",
-      "256",
-      "512"
-    ],
-    "rating": {
-      "qty_reviews": 5,
-      "qty_stars": 3
-    }
-  },
-  {
-    "_id": {
-      "$oid": "63010b3c0de1e8fdcf96bc24"
-    },
-    "title": "Lenovo V110-15IAP",
-    "description": "Asus VivoBook 15 X540NA-GQ008T Chocolate Black, 15.6\" HD, Pentium N4200, 4GB, 500GB, Windows 10 Home, En kbd",
-    "img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
-    "price": 356.49,
-    "hdd": [
-      "128",
-      "256",
-      "512"
-    ],
-    "rating": {
-      "qty_reviews": 6,
-      "qty_stars": 2
-    }
-  },
-  {
-    "_id": {
-      "$oid": "63010b3c0de1e8fdcf96bc25"
-    },
-    "title": "Lenovo ThinkPad E31-80",
-    "description": "Lenovo ThinkPad E31-80, 13.3\" HD, Celeron 3855U 1.6GHz, 4GB, 128GB SSD, Windows 10 Home",
-    "img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
-    "price": 404.23,
-    "hdd": [
-      "128",
-      "256",
-      "512"
-    ],
-    "rating": {
-      "qty_reviews": 12,
-      "qty_stars": 1
-    }
-  },
-  {
-    "_id": {
-      "$oid": "63010b3c0de1e8fdcf96bc26"
-    },
-    "title": "Lenovo V110-15ISK",
-    "description": "Lenovo V110-15ISK, 15.6\" HD, Core i3-6006U, 8GB, 128GB SSD, Windows 10 Home",
-    "img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
-    "price": 409.63,
-    "hdd": [
-      "128",
-      "256",
-      "512"
-    ],
-    "rating": {
-      "qty_reviews": 9,
-      "qty_stars": 3
-    }
-  },
-  {
-    "_id": {
-      "$oid": "63010b3c0de1e8fdcf96bc27"
-    },
-    "title": "Lenovo V110-15ISK",
-    "description": "Lenovo V110-15ISK, 15.6\" HD, Core i3-6006U, 4GB, 128GB SSD, Windows 10 Pro",
-    "img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
-    "price": 454.73,
-    "hdd": [
-      "128",
-      "256",
-      "512"
-    ],
-    "rating": {
-      "qty_reviews": 2,
-      "qty_stars": 2
-    }
-  }
+	{
+		"_id": {
+			"$oid": "630e2df74dcb1ccc11a4ed6c"
+		},
+		"title": "Lenovo V110-15IAP",
+		"description": "Lenovo V110-15IAP, 15.6\" HD, Celeron N3350 1.1GHz, 4GB, 128GB SSD, Windows 10 Home",
+		"img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
+		"price_for_hdd": {
+			"128": {
+				"price": 321.94
+			},
+			"256": {
+				"price": 341.94
+			},
+			"512": {
+				"price": 361.94
+			}
+		},
+		"rating": {
+			"qty_reviews": 5,
+			"qty_stars": 3
+		}
+	},
+	{
+		"_id": {
+			"$oid": "630e2df74dcb1ccc11a4ed6d"
+		},
+		"title": "Lenovo V110-15IAP",
+		"description": "Asus VivoBook 15 X540NA-GQ008T Chocolate Black, 15.6\" HD, Pentium N4200, 4GB, 500GB, Windows 10 Home, En kbd",
+		"img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
+		"price_for_hdd": {
+			"128": {
+				"price": 356.49
+			},
+			"256": {
+				"price": 376.49
+			},
+			"512": {
+				"price": 396.49
+			}
+		},
+		"rating": {
+			"qty_reviews": 6,
+			"qty_stars": 2
+		}
+	},
+	{
+		"_id": {
+			"$oid": "630e2df74dcb1ccc11a4ed6e"
+		},
+		"title": "Lenovo ThinkPad E31-80",
+		"description": "Lenovo ThinkPad E31-80, 13.3\" HD, Celeron 3855U 1.6GHz, 4GB, 128GB SSD, Windows 10 Home",
+		"img_src": "https://webscraper.io/images/test-sites/e-commerce/items/cart2.png",
+		"price_for_hdd": {
+			"128": {
+				"price": 404.23
+			},
+			"256": {
+				"price": 424.23
+			},
+			"512": {
+				"price": 444.23
+			}
+		},
+		"rating": {
+			"qty_reviews": 12,
+			"qty_stars": 1
+		}
+	},
   {...}
 ]
 ```
@@ -218,16 +247,28 @@ Raspagem de dados concluída:
 
 Para rodar os testes, rode o seguinte comando
 
+com docker
 ```bash
 docker container exec -it webscraper_api bash -c "pytest ./tests --verbose"
+```
+
+sem docker
+```bash
+pytest ./tests --verbose
 ```
 
 Ao todo a aplicação possui `60%` de cobertura de testes.
 
 Caso queira ver a cobertura de testes rode o comando
 
+com docker
 ```bash
 docker container exec -it webscraper_api bash -c "pytest --cov=webscraper_api tests/"
+```
+
+sem docker
+```bash
+pytest --cov=webscraper_api tests/
 ```
 
 
