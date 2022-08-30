@@ -28,18 +28,6 @@ def get_notebooks_infos(note_links):
                     "xpath=/html/body/div[1]/div[3]/div/div[2]/div/div/div[1]/img"
                 ).get_attribute("src")
 
-                price = page.locator("div.caption .price").inner_text()
-
-                hdd_content = page.locator(
-                    "xpath=/html/body/div[1]/div[3]/div/div[2]/div/div/div[2]/div[2]"
-                )
-
-                hdd = hdd_content.locator("role=button[disabled=false]").evaluate_all(
-                    """(els) => els
-                        .filter(el => !el.className.includes('disabled'))
-                        .map(el => el.innerText)"""
-                )
-
                 rating = page.locator(
                     "xpath=/html/body/div[1]/div[3]/div/div[2]/div/div/div[2]/div[3]"
                 )
@@ -50,12 +38,24 @@ def get_notebooks_infos(note_links):
                     "(stars) => stars.length"
                 )
 
+                hdds_size = page.locator("div.swatches > button.swatch").all_inner_texts()
+
+                price_for_hdd = dict()
+
+                for hddBtnText in hdds_size:
+                    hddBtn = page.locator("div.swatches > button.swatch", has_text=hddBtnText)
+                    if hddBtn.evaluate("(el) => el.className.includes('disabled')"):
+                        continue
+
+                    hddBtn.click()
+                    price = page.locator("div.caption .price").text_content()
+                    price_for_hdd[hddBtnText] = {"price": float(price.replace("$", ""))}
+
                 note_info = {
                     "title": title,
                     "description": description,
                     "img_src": PAGE_URI + img_src,
-                    "price": float(price.replace("$", "")),
-                    "hdd": hdd,
+                    "price_for_hdd": price_for_hdd,
                     "rating": {
                         "qty_reviews": int(qty_reviews.strip(" reviews")),
                         "qty_stars": int(qty_stars),

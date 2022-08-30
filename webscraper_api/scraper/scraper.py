@@ -1,16 +1,21 @@
 import _thread
 from operator import itemgetter
 
-from webscraper_api.scraper.crawlers.get_notebook_links import get_notebook_links
-from webscraper_api.scraper.crawlers.get_notebooks_infos import get_notebooks_infos
-from webscraper_api.scraper.model_mongo import save_order, save_scraped_data, update_order
+from webscraper_api.scraper.crawlers.get_notebook_links import \
+    get_notebook_links
+from webscraper_api.scraper.crawlers.get_notebooks_infos import \
+    get_notebooks_infos
+from webscraper_api.scraper.model_mongo import (save_order, save_scraped_data,
+                                                update_order)
 
 
 class Scraper:
     def __get_notebooks(self):
         note_links = get_notebook_links()
         notebooks_infos = get_notebooks_infos(note_links)
-        filtered_by_price = sorted(notebooks_infos, key=itemgetter("price"))
+        filtered_by_price = sorted(
+            notebooks_infos, key=lambda notes: notes["price_for_hdd"]["128"]["price"]
+        )
         save_scraped_data(filtered_by_price)
 
     def __save_order(self):
