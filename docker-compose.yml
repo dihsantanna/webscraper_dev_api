@@ -1,5 +1,4 @@
 version: "3.9"
-name: webscraper_api
 services:
   api:
     build: .
