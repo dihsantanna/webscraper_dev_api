@@ -5,6 +5,8 @@ Api RESTful desenvolvida a partir de dados providos por um crawler que faz uma r
 
 O crawler está configurado para obter os dados de notebooks da marca lenovo e os ordena do preço mais barato para o mais caro.
 
+![Gif de demonstração](demonstracao.gif)
+
 ## O desafio é:
 
 * Acessar esse site https://webscraper.io/test-sites/e-commerce/allinone
