@@ -2,7 +2,7 @@
 
 FROM ubuntu:focal
 
-FROM python:3.10.6-slim-bullseye
+FROM python:3.11.3-slim-bullseye
 
 EXPOSE 5000
 
