@@ -12,10 +12,7 @@ O crawler está configurado para obter os dados de notebooks da marca lenovo e o
 * Acessar esse site https://webscraper.io/test-sites/e-commerce/allinone
 * Pegar todos notebooks Lenovo ordenando do mais barato para o mais caro.
 * Pegar todos os dados disponíveis dos produtos.
-* É interessante que o robô possa ser consumido por outros serviços. Recomendamos a criação de uma pequena RESTFul API JSON para deixar mais otimizado.
-
-## Stacks obrigatórias
-* Utilizar `Puppeteer` ou `Playwright`.
+* Os dados obtidos pelo robô devem ser consumido por uma pequena RESTFul API JSON para deixar mais otimizado.
 
 ## Stacks utilizadas
 
