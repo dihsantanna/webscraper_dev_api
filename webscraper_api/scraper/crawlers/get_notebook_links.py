@@ -13,15 +13,19 @@ def get_notebook_links():
             page = browser.new_page()
             page.goto(PAGE_URL)
 
-            page.locator("xpath=/html/body/div[1]/div[2]/div/div/div/h1").wait_for()
+            computer_btn = page.get_by_role("link", name="Computers")
 
-            page.locator('xpath=//*[@id="side-menu"]/li[2]/a').click()
+            computer_btn.wait_for()
 
-            page.locator("xpath=/html/body/div[1]/div[3]/div/div[2]/h1").wait_for()
+            computer_btn.click()
 
-            page.locator('xpath=//*[@id="side-menu"]/li[2]/ul/li[1]/a').click()
+            laptop_btn = page.get_by_role("link", name="Laptops")
+            
+            laptop_btn.wait_for()
 
-            page.locator("xpath=/html/body/div[1]/div[3]/div/div[2]/h1").wait_for()
+            laptop_btn.click()
+
+            page.locator('.page-header', has_text="Computers / Laptops").wait_for()
 
             notebooks = page.locator('h4 a:has-text("Lenovo")')
 
